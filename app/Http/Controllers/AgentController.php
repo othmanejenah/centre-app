@@ -143,13 +143,12 @@ class AgentController extends Controller
         $validated['user_id'] = auth()->id();
         $ticket = Ticket::create($validated);
 
-        // Notification existante
+        
         $supervisors = User::where('role', 'supervisor')->get();
         foreach ($supervisors as $supervisor) {
             $supervisor->notify(new NewTicketNotification($ticket));
         }
 
-       // Notification par email
     try {
         Log::info('Tentative d\'envoi de notification à l\'agent : ' . $ticket->user->email);
         $ticket->user->notify(new TicketEmailNotification($ticket, 'created'));
