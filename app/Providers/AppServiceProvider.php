@@ -38,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
                     return redirect()->route('supervisor.dashboard');
                 }
             }
-            return redirect('/dashboard'); // Fallback to default dashboard
+            return redirect('/dashboard'); 
         });
     }
 }
